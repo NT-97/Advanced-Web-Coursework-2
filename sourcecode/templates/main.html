@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
+  <title>Scheduling Calendar</title>
+</head>
+<body>
+  <div class="month">
+        <img src="/static/calendaricon.png" alt="calendaricon" class="calendar">
+    <ul>
+      <li class="previous">
+        <a href="/{{ previous.year ~ '/' ~ previous.month }}">&laquo;</a>
+      </li>
+      <li class="next">
+        <a href="/{{ following.year ~ '/' ~ following.month }}">&raquo;</a>
+      </li>
+      <li>
+        {{ general.strftime("%B") }}<br>
+        <span>{{ general.year }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <ul class="daysofWeek">
+    <li>Monday</li>
+    <li>Tuesday</li>
+    <li>Wednesday</li>
+    <li>Thursday</li>
+    <li>Friday</li>
+    <li>Saturday</li>
+    <li>Sunday</li>
+  </ul>
+
+  <ul class="days">
+    
+    {% for i in range(0, first) %}
+      <li></li>
+    {% endfor %}
+    
+    {% for day in range(1, last+1) %}
+      <li>
+        {% if day == general.day %}
+          <span class="active">
+        {% endif %}
+        <a href="/{{ general.year ~ '/' ~ general.month ~ '/' ~ day }}">{{ day }}</a>
+        {% if day == general.day %}
+          </span>
+        {% endif %}
+        </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
