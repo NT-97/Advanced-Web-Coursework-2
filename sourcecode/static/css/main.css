@@ -25,6 +25,7 @@ a {
     width: 100%;
     background:#d8a1a1;
     text-align: center;
+    border-radius: 10px 10px 10px 10px;
 }
 
 
@@ -50,11 +51,24 @@ a {
     padding-top: 10px;
 }
 
+.footer {
+    position: fixed;
+    
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(182, 48, 48);
+    color: rgb(0, 0, 0);
+    text-align: left;
+    padding-left: 10%;
+    
+}
 
 .daysofWeek {
     margin: 0;
     padding: 10px 0;
     background-color:#ddd;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .daysofWeek li {
@@ -69,6 +83,7 @@ a {
     padding: 10px 0;
     background:rgb(90, 43, 43);
     margin: 0;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .days li {
