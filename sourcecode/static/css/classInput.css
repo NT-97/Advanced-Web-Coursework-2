@@ -1,0 +1,87 @@
+
+.logo
+
+    {
+        position: absolute;
+        top: 22px;
+        left: 22px;
+    
+    }   
+
+    .container{
+        margin: 0 auto;
+        width: 340px;
+        position: absolute;
+        top: 35%;
+        right: 0;
+        left: 0;
+        bottom: 50%;
+    
+    }
+
+   .row{
+
+    border: 5px solid #000000;
+    border-radius: 5%;
+    margin-top: -33px;
+    background-color: #e23131;
+}
+ 
+
+
+.button {
+    background-color: rgb(14, 61, 192);
+    border-radius: 10px 10px 10px 10px;
+    padding: -1px 20px;
+    margin: 3px 8px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    color: white;
+
+}
+
+
+.button1 {
+    border-radius: 10px 10px 10px 10px;
+    background-color: rgb(233, 118, 23);
+    padding: -1px 20px;
+    margin: 3px 8px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    color: white;
+
+}
+    .header{
+    
+        padding: 60px;
+        text-align: center;
+        background: white;
+        color: black;
+        font-size: 30px;
+        font-weight: bolder;
+        text-decoration: underline;
+      }
+    
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        height: 10%;
+        width: 100%;
+        background-color: #e23131;
+        color: white;
+        text-align: right;
+    }
+
+    p {
+
+        margin-top: 12px;
+        margin-bottom: 1rem;
+        margin-right: 28px;
+    }
+    
+    a{
+        color: darkred;
+    }

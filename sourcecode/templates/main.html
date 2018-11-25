@@ -1,58 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Demonstrator System</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
-  <title>Scheduling Calendar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static',
+  filename='css/bootstrap.min.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',
+  filename='css/main.css') }}">
 </head>
 <body>
-  <div class="month">
-        <img src="/static/calendaricon.png" alt="calendaricon" class="calendar">
-    <ul>
-      <li class="previous">
-        <a href="/{{ previous.year ~ '/' ~ previous.month }}">&laquo;</a>
-      </li>
-      <li class="next">
-        <a href="/{{ following.year ~ '/' ~ following.month }}">&raquo;</a>
-      </li>
-      <li>
-        {{ general.strftime("%B") }}<br>
-        <span>{{ general.year }}</span>
-      </li>
-    </ul>
-  </div>
+    <div>
+        <img src="{{ url_for('static', filename='logo (1).png') }}" alt="Logo" class="logo">
+    </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="colour-block">
+          <h1>Summary</h1>
+          <p>User Logged In: {{ user['user'] }}</p>
+          <p>Hourly Pay: &pound;{{ '{:0.1f}'.format(user['pay']) }}
+          <p>Classes Taught: {{ shifts }}</p>
+          <p>Hours Taught : {{ '{:0.1f}'.format(total) }}</p>
+          <p>Total Pay: &pound;{{ '{:0.1f}'.format(earned) }}</p>
+          
+          <div>
+              <a href="/logout" class="button">Logout</a>
+          </div>
+          
+          
+        </div>
+      </div>
+      <div class="col-md-8">
 
+        <div class="month">
+          
+          <ul>
+            <li class="previous">
+              <a href="/{{ previous.year ~ '/' ~ previous.month }}">&#10094;</a>
+            </li>
+            <li class="following">
+              <a href="/{{ following.year ~ '/' ~ following.month }}">&#10095;</a>
+            </li>
+            {# Printing main month and year #}
+            <li>
+              {{ main.strftime("%B") }}<br>
+              <span>{{ main.year }}</span>
+            </li>
+          </ul>
+        </div>
+
+        
+
+        <ul class="daysOfWeek">
+          <li>Monday</li>
+          <li>Tuesday</li>
+          <li>Wednesday</li>
+          <li>Thursday</li>
+          <li>Friday</li>
+          <li>Saturday</li>
+          <li>Sunday</li>
+        </ul>
+
+        <ul class="days">
+          
+         
+            {% for i in range(0, first) %}
+            <li></li>
+          {% endfor %}
+          
+          {% for day in range(1, last+1) %}
+            {% if day in daysWithClasses %}
+              {% if day == main.day %}
+                <li class="active daysWithClasses">
+              {% else %}
+                <li class="daysWithClasses">
+              {% endif %}
+            {% elif day == main.day %}
+              <li class="active">
+            {% else %}
+              <li>
+            {% endif %} 
+             
+                <a href="/{{ main.year ~ '/' ~ main.month ~ '/' ~ day }}">                   {{ day }}
+                  {% if daysWithClasses[day] %}
+                    <br><p>{{daysWithClasses[day]['class_start'] }} - {{
+                    daysWithClasses[day]['class_end'] }}</p>
+                  {% endif %}
+                </a>
+              </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="footer">
-    <p>Nick Taylors Scheduling System</p>
-  </div>
-
-  <ul class="daysofWeek">
-    <li>Monday</li>
-    <li>Tuesday</li>
-    <li>Wednesday</li>
-    <li>Thursday</li>
-    <li>Friday</li>
-    <li>Saturday</li>
-    <li>Sunday</li>
-  </ul>
-
-  <ul class="days">
-    
-    {% for i in range(0, first) %}
-      <li></li>
-    {% endfor %}
-    
-    {% for day in range(1, last+1) %}
-      <li>
-        {% if day == general.day %}
-          <span class="active">
-        {% endif %}
-        <a href="/{{ general.year ~ '/' ~ general.month ~ '/' ~ day }}">{{ day }}</a>
-        {% if day == general.day %}
-          </span>
-        {% endif %}
-        </li>
-    {% endfor %}
-  </ul>
+      <p>Created by: Nick Taylor</p>
+  <p>Contact information: <a href="mailto:40203073@live.napier.ac.uk">
+      40203073@live.napier.ac.uk</a>.</p>
+    </div>
 </body>
 </html>

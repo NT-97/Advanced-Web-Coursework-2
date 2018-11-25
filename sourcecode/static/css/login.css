@@ -1,0 +1,118 @@
+    body{
+       
+        background-color: white;    
+}
+
+form {
+    border: 5px solid #000000;
+    border-radius: 5%;
+    margin-top: 58px;
+    background-color: #e23131;
+}
+
+
+.container{
+    margin: 0 auto;
+    width: 340px;
+    position: absolute;
+    top: 10%;
+    right: 0;
+    left: 0;
+    bottom: 50%;
+
+}
+.label{margin-left: 10px;}
+
+input[type=text], input[type=password] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 10px 10px;
+    box-sizing: border-box;
+}
+
+.button {
+    background-color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    border-radius: 10px 10px 10px 10px;
+    margin: 10px 25px;
+    border: none;
+    cursor: pointer;
+    width: 75%;
+    color: #000000
+}
+
+
+
+
+.button:hover {
+    opacity: 0.8;
+}
+
+p {
+
+    margin-top: 12px;
+    margin-bottom: 1rem;
+    margin-right: 28px;
+}
+
+a{
+    color: hotpink;
+}
+
+.header{
+    
+    padding: 60px;
+    text-align: center;
+    background: white;
+    color: black;
+    font-size: 30px;
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    background-color: #e23131;
+    color: white;
+    text-align: right;
+}
+
+.logo
+
+    {
+        position: absolute;
+        top: 22px;
+        left: 22px;
+    
+    }
+
+
+.imgcontainer {
+    position: relative;
+    height: 210px;
+    width: 500px;
+    margin: 1px 50px;
+  }
+
+/* Avatar image */
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+    position:absolute;
+    left:0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+img.avatar:hover {
+    opacity:0;
+  }

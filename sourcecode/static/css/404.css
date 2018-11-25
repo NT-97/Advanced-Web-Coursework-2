@@ -1,0 +1,64 @@
+.logo
+
+    {
+        margin: 0 auto;
+        width: 340px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        bottom: 50%;
+    
+    }
+ 
+    .logo
+    {
+            opacity:0.5;
+    }
+    .logo:hover
+    {
+            opacity:1;
+    }
+
+    .logo:hover
+{
+        -webkit-transform: scale(2.0);
+        -ms-transform: scale(2.0);
+        transform: scale(2.0);
+}
+
+.link1{  
+    color: black;
+    font-weight: bold;
+    font-size: 22px;
+    margin: 0 auto;
+    width: 340px;
+    position: absolute;
+    top: 10%;
+    right: 65%;
+    left: 0;
+    bottom: 50%;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    background-color: #e23131;
+    color: white;
+    text-align: right;
+}
+
+p {
+
+    margin-top: 12px;
+    margin-bottom: 1rem;
+    margin-right: 28px;
+}
+
+a{
+    color: darkred;
+}
+
