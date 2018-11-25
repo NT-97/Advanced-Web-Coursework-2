@@ -10,17 +10,21 @@
 
 </head>
 <body>
+  <!-- where the logo is input into the page -->
     <div>
-        <img src="{{ url_for('static', filename='logo (1).png') }}" alt="Logo" class="logo">
+        <img src="{{ url_for('static', filename='images/logo (1).png') }}" alt="Logo" class="logo">
     </div>
+    <!-- page header -->
     <div class="header">
         Class Information
     </div>
+    <!-- Classes container, row and col-md-8 created(col-md-8 bootstrap) -->
   <div class="container">
     <div class="row">
     <div class="col-md-8">
+      <!-- use of forms for post method to occur -->
       <form action="/{{ year ~ '/' ~ month }}" method="POST" name="form">
-     
+     <!-- this is where I create all of the inputs you can for each day -->
         <label for="moduleID">Module ID:</label>
         <input type="text" placeholder="Enter Module ID" id="moduleID" name="moduleID" value="{{ event['moduleID'] if event }}" required/>
        
@@ -46,16 +50,16 @@
           <input type="submit" class="button1" name="action" value="Delete"/>
         {% endif %}
         {% if duration %}
-          <span><br>Hours Worked: {{ '{:0.1f}'.format(duration) }}hrs</span>
+          <span><br>Hours Taught: {{ '{:0.1f}'.format(duration) }}hrs</span>
         {% endif %}
         {% if earned %}
           <span><br>Earned: &pound;{{ '{:0.1f}'.format(earned) }}</span>
         {% endif %}
-       
-     
+      
         <input type="hidden" name="day" value="{{ day }}"/>
       </form>
     </div>
+    <!-- footer at bottom of page -->
     <div class="footer">
         <p>Created by: Nick Taylor</p>
       

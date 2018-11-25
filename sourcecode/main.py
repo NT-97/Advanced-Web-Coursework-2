@@ -6,9 +6,10 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'ewhj[a49fjq[in4pnja['
+#where the database is stored
 database_location = 'var/demonstratordb.db'
 user = None
-
+#get the database connection
 def retrieveDatabase():
   db = getattr(g, 'db', None)
   if db is None:
@@ -17,13 +18,13 @@ def retrieveDatabase():
    
     db.row_factory = sqlite3.Row
   return db
-
+#query the database
 def queryDatabase(query, args=(), one=False):
   cur = retrieveDatabase().execute(query, args)
   rv = cur.fetchall()
   cur.close()
   return (rv[0] if rv else None) if one else rv
-
+#insert into db
 def insertValues(table, values=()):
   cur = retrieveDatabase().cursor()
   query = 'INSERT OR REPLACE INTO %s VALUES (%s)' % (
@@ -33,7 +34,7 @@ def insertValues(table, values=()):
   cur.execute(query, values)
   retrieveDatabase().commit()
   cur.close()
-
+#delete row from db
 def deleteRow(table, values=()):
   cur = retrieveDatabase().cursor()
   query = 'DELETE FROM %s WHERE day=? AND month=? AND year=? AND user=?' % (table)
@@ -41,13 +42,13 @@ def deleteRow(table, values=()):
   retrieveDatabase().commit()
   cur.close
 
-
+#close connection when application is exited
 @app.teardown_appcontext
 def close_db_connection(exception):
   db = getattr(g, 'db', None)
   if db is not None:
     db.close()
-
+#intitialise the db for first time use 
 def init_db():
   with app.app_context():
     db = retrieveDatabase()
@@ -85,33 +86,36 @@ def login():
       flash("New user added to database!!!")
   return redirect(url_for('root'))
 
-
+#logout route
 @app.route('/logout')
 def logout():
-  
   global user
   user = None
   return render_template('login.html')
 
-
+#root of app
 @app.route('/')
 @app.route('/<int:year>/<int:month>', methods=['GET', 'POST'])
 def root(year=None, month=None):
 
   if not user:
+    #redirect user to login screen
     return redirect(url_for('login'))
-
+# Setting today's date as the current date
   main = date.today()
   if year and month:
     main = main.replace(year=year, month=month)
 
+  # Calculating the last day in the current month
   last_day = monthrange(main.year, main.month)[1]
+  # Finding the next month by adding a day to the last day of the month
   following_month = main.replace(day=last_day) + timedelta(days=1)
-  
+    # Calculating the weekday of the first day
   first_weekday = monthrange(main.year, main.month)[0]
-  
+  # previouos month calculated by subtracting one from the first day of current month
   previous_month = main.replace(day=1) - timedelta(days=1)
 
+  # Making changes to the calendar if the user POST'ed a request
   if request.method == 'POST':
     if request.form['action'] == 'Save':
       insertValues("classes", [request.form['day'], main.month, main.year,
@@ -130,26 +134,33 @@ def root(year=None, month=None):
   # Money made
   earned = 0
 
+#query user details
   sql = "SELECT * FROM users WHERE user=?"
   userDetails = queryDatabase(sql, [user], one=True)
 
+#searching classes for the current month
   sql = "SELECT day, class_start, class_end FROM classes WHERE year=? AND month=? AND user=?"
   for row in queryDatabase(sql, [main.year, main.month, user]):
     classes += 1
     formatTime = '%H:%M'
+    #calculate duration of class
     duration = datetime.strptime(row['class_end'], formatTime) - datetime.strptime(row['class_start'], formatTime)
+    #round the duration
     duration_rounded = duration.total_seconds() / 3600.0
     total_hours += duration_rounded
+    #added to total earnings
     earned += userDetails['pay'] * duration_rounded
     daysWithClasses[row['day']] = {'class_start': row['class_start'], 'class_end':
     row['class_end'], 'duration': duration_rounded}
 
+#return render templates and pass arguments
   return render_template('main.html', main=main, last=last_day,
   following=following_month, first=first_weekday, previous=previous_month,
   daysWithClasses=daysWithClasses, classes=classes, total=total_hours, user=userDetails,
   earned=earned)
 
 
+# Route for displaying the details of a day
 @app.route('/<int:year>/<int:month>/<int:day>')
 def day(year, month, day):
 

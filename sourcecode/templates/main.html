@@ -11,18 +11,19 @@
 </head>
 <body>
     <div>
-        <img src="{{ url_for('static', filename='logo (1).png') }}" alt="Logo" class="logo">
+        <img src="{{ url_for('static', filename='images/logo (1).png') }}" alt="Logo" class="logo">
     </div>
   <div class="container">
     <div class="row">
       <div class="col-md-4">
+        <!-- summary block -->
         <div class="colour-block">
           <h1>Summary</h1>
           <p>User Logged In: {{ user['user'] }}</p>
-          <p>Hourly Pay: &pound;{{ '{:0.1f}'.format(user['pay']) }}
+          <p>Hourly Pay: &pound;{{ '{:0.2f}'.format(user['pay']) }}
           <p>Classes Taught: {{ classes }}</p>
-          <p>Hours Taught : {{ '{:0.1f}'.format(total) }}</p>
-          <p>Total Pay: &pound;{{ '{:0.1f}'.format(earned) }}</p>
+          <p>Hours Taught : {{ '{:0.2f}'.format(total) }}</p>
+          <p>Total Pay: &pound;{{ '{:0.2f}'.format(earned) }}</p>
           
           <div>
               <a href="/logout" class="button">Logout</a>
@@ -34,7 +35,7 @@
       <div class="col-md-8">
 
         <div class="month">
-          
+          <!-- hyperlinks to go to previous or following months -->
           <ul>
             <li class="previous">
               <a href="/{{ previous.year ~ '/' ~ previous.month }}">&#10094;</a>
@@ -51,7 +52,7 @@
         </div>
 
         
-
+<!-- days of the week -->
         <ul class="daysOfWeek">
           <li>Monday</li>
           <li>Tuesday</li>
@@ -64,7 +65,7 @@
 
         <ul class="days">
           
-         
+         <!-- formats the days correctly corressponding to the date -->
             {% for i in range(0, first) %}
             <li></li>
           {% endfor %}
@@ -81,8 +82,8 @@
             {% else %}
               <li>
             {% endif %} 
-             
-                <a href="/{{ main.year ~ '/' ~ main.month ~ '/' ~ day }}">                   {{ day }}
+             <!-- shows all days on calendar correctly -->
+                <a href="/{{ main.year ~ '/' ~ main.month ~ '/' ~ day }}">               {{ day }}
                   {% if daysWithClasses[day] %}
                     <br><p>{{daysWithClasses[day]['class_start'] }} - {{
                     daysWithClasses[day]['class_end'] }}</p>
